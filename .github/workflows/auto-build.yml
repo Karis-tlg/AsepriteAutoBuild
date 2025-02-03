@@ -79,12 +79,7 @@ jobs:
         run: |
           cd build/bin
           7z a ../../Aseprite-Windows-x64-${{ needs.version-check.outputs.latest_tag }}.zip *
-          
-      - name: Upload Aseprite
-        uses: actions/upload-artifact@v2
-        with:
-          name: Aseprite-Windows-x64-${{ steps.get_version.outputs.version }}
-          path: Aseprite-Windows-x64-${{ steps.get_version.outputs.version }}.zip
+          t_version.outputs.version }}.zip
           
       - name: Create Release
         uses: softprops/action-gh-release@v2
