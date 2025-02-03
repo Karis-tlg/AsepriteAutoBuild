@@ -42,7 +42,7 @@ def download_skia_for_windows(tag):
 	os.system(f'7z x src/{SKIA_RELEASE_FILE_NAME} -osrc/skia')
 
 if __name__ == '__main__':
-	aseprite_tag = get_latest_tag_aseprite()
+	aseprite_tag = sys.argv[1] if len(sys.argv) > 1 else get_latest_tag_aseprite()
 	clone_aseprite(aseprite_tag)
 	save_aseprite_tag(aseprite_tag)
 
