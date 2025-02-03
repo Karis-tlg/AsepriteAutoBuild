@@ -1,8 +1,11 @@
 name: Auto build Aseprite
 
 on:
+  schedule:
+    - cron: '0 0 * * *'  # Every day at midnight UTC
   push:
-    branches: ["main"]
+    branches:
+      - main
 
 permissions:
   contents: write
@@ -25,7 +28,37 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Download Aseprite
+      - name: Get latest version from GitHub
+        id: get_version
+        run: |
+          latest_version=$(curl -s https://api.github.com/repos/aseprite/aseprite/releases/latest | jq -r .tag_name)
+          echo "Latest version: $latest_version"
+          echo "LATEST_VERSION=$latest_version" >> $GITHUB_ENV
+
+      - name: Read current version from version.txt
+        id: read_version
+        run: |
+          if [ -f version.txt ]; then
+            current_version=$(cat version.txt)
+            echo "Current version: $current_version"
+          else
+            current_version="none"
+            echo "No previous version found, starting fresh."
+          fi
+          echo "CURRENT_VERSION=$current_version" >> $GITHUB_ENV
+
+      - name: Compare versions and decide whether to build
+        id: compare_versions
+        run: |
+          if [ "$LATEST_VERSION" != "$CURRENT_VERSION" ]; then
+            echo "New version found, triggering build."
+            echo "SHOULD_BUILD=true" >> $GITHUB_ENV
+          else
+            echo "No new version found, skipping build."
+            echo "SHOULD_BUILD=false" >> $GITHUB_ENV
+
+      - name: Download Aseprite and build if new version
+        if: env.SHOULD_BUILD == 'true'
         run: |
           python download.py
 
@@ -35,6 +68,7 @@ jobs:
           arch: x64
 
       - name: Build Aseprite
+        if: env.SHOULD_BUILD == 'true'
         run: |
           mkdir build
           cd build
@@ -44,19 +78,34 @@ jobs:
 
       - name: Get version
         id: get_version
+        if: env.SHOULD_BUILD == 'true'
         run: |
           $version = Get-Content version.txt
           echo "version=$version" >> $env:GITHUB_OUTPUT
 
       - name: Zip Aseprite
+        if: env.SHOULD_BUILD == 'true'
         run: |
           cd build/bin
           7z a ../../Aseprite-Windows-x64-${{ steps.get_version.outputs.version }}.zip *
 
+      - name: Upload Aseprite
+        if: env.SHOULD_BUILD == 'true'
+        uses: actions/upload-artifact@v3
+        with:
+          name: Aseprite-Windows-x64-${{ steps.get_version.outputs.version }}
+          path: Aseprite-Windows-x64-${{ steps.get_version.outputs.version }}.zip
+
       - name: GH Release
+        if: env.SHOULD_BUILD == 'true'
         uses: softprops/action-gh-release@v2
         with:
           name: Aseprite-Windows-x64-${{ steps.get_version.outputs.version }}
           tag_name: ${{ steps.get_version.outputs.version }}
           files: |
-            Aseprite-Windows-x64-${{ steps.get_version.outputs.version }}.zip
+            ./Aseprite-Windows-x64-${{ steps.get_version.outputs.version }}.zip
+
+      - name: Save current version to version.txt
+        if: env.SHOULD_BUILD == 'true'
+        run: |
+          echo $LATEST_VERSION > version.txt
