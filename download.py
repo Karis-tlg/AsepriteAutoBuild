@@ -1,4 +1,5 @@
 import requests
+import sys
 import os
 
 ASEPRITE_REPOSITORY = 'aseprite/aseprite'
