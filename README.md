@@ -25,6 +25,10 @@
 <a href="https://github.com/Karis-tlg/AsepriteAutoBuild/graphs/contributors">
     <img src="https://contrib.rocks/image?repo=Karis-tlg/AsepriteAutoBuild" />
 </a>
+<a href="https://github.com/hardingadonis/aseprite-auto-build/graphs/contributors">
+    <img src="https://contrib.rocks/image?repo=hardingadonis/aseprite-auto-build" />
+</a>
+
 
 ## Licenses:
 
