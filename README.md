@@ -1,10 +1,10 @@
 # Aseprite Auto Build
 
-[![Auto build Aseprite](https://github.com/hardingadonis/aseprite-auto-build/actions/workflows/auto-build.yml/badge.svg)](https://github.com/hardingadonis/aseprite-auto-build/actions/workflows/auto-build.yml)
-![GitHub contributors](https://img.shields.io/github/contributors/hardingadonis/aseprite-auto-build)
-![GitHub top language](https://img.shields.io/github/languages/top/hardingadonis/aseprite-auto-build)
-![GitHub repo size](https://img.shields.io/github/repo-size/hardingadonis/aseprite-auto-build)
-![GitHub License](https://img.shields.io/github/license/hardingadonis/aseprite-auto-build)
+[![Auto build Aseprite](https://github.com/Karis-tlg/AsepriteAutoBuild/actions/workflows/auto-build.yml/badge.svg)](https://github.com/Karis-tlg/AsepriteAutoBuild/actions/workflows/auto-build.yml)
+![GitHub contributors](https://img.shields.io/github/contributors/Karis-tlg/AsepriteAutoBuild)
+![GitHub top language](https://img.shields.io/github/languages/top/Karis-tlg/AsepriteAutoBuild)
+![GitHub repo size](https://img.shields.io/github/repo-size/Karis-tlg/AsepriteAutoBuild)
+![GitHub License](https://img.shields.io/github/license/Karis-tlg/AsepriteAutoBuild)
 
 > Auto build Aseprite via GitHub Actions
 
@@ -22,10 +22,10 @@
 
 ## Contributors:
 
-<a href="https://github.com/hardingadonis/aseprite-auto-build/graphs/contributors">
-    <img src="https://contrib.rocks/image?repo=hardingadonis/aseprite-auto-build" />
+<a href="https://github.com/Karis-tlg/AsepriteAutoBuild/graphs/contributors">
+    <img src="https://contrib.rocks/image?repo=Karis-tlg/AsepriteAutoBuild" />
 </a>
 
 ## Licenses:
 
-- [Auto Build Aseprite](https://github.com/hardingadonis/aseprite-auto-build) is under the [MIT license](https://github.com/hardingadonis/aseprite-auto-build/blob/main/LICENSE).
+- [Auto Build Aseprite](https://github.com/Karis-tlg/AsepriteAutoBuild) is under the [MIT license](https://github.com/Karis-tlg/AsepriteAutoBuild/blob/main/LICENSE).
